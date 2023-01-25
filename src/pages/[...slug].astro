@@ -1,0 +1,41 @@
+---
+export const prerender = true
+
+export async function getStaticPaths() {
+  const pages = [
+    {
+      slug: "page/1",
+      title: "Astro Store",
+      text: "Welcome to the Astro store!",
+    },
+    {
+      slug: "page/2",
+      title: "Astro products",
+      text: "We have lots of products for you",
+    },
+    {
+      slug: "page/3",
+      title: "The ultimate Astro handbook",
+      text: "If you want to learn Astro, you must read this book.",
+    },
+  ];
+  return pages.map((page) => {
+    return {
+      params: { slug: page.slug },
+      props: { page },
+    };
+  });
+}
+
+const { page } = Astro.props;
+console.log(Astro.url)
+---
+<html>
+  <head>
+    <title>{page.title}</title>
+  </head>
+  <body>
+    <h1>{page.title}</h1>
+    <p>{page.text}</p>
+  </body>
+</html>
